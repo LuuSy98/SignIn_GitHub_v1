@@ -1,0 +1,91 @@
+﻿<Window x:Class="SignInGitHub.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SignInGitHub"
+        xmlns:viewModels="clr-namespace:SignInGitHub.MVVM.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="550">
+
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Image Source="../../Image/SignIn.png"/>
+
+        <Border Background="#f6f8fa" Grid.Row="1"
+                CornerRadius="10" Margin="80,40"
+                BorderBrush="#ebedef" BorderThickness="1">
+            <StackPanel Orientation="Vertical" Margin="20,10">
+                <Label Content="Username or email address" Margin="10,5,10,5"/>
+                
+                <TextBox Margin="10,0"
+                         Text="{Binding CurrentUser.UserName, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <Grid Margin="10,20,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Password"/>
+                    <Button Grid.Column="1" Content="Forgot password?"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ButtonLabelLikeStyle}"/>
+                </Grid>
+                
+                <TextBox Margin="10,5,10,20" Height="30"
+                         Text="{Binding CurrentUser.Password, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <Button Content="Sign In" Height="40" 
+                        Style="{StaticResource ButtonStyle}"
+                        Margin="10,20"
+                        Command="{Binding SignInButtonCommand}"/>
+            </StackPanel>
+        </Border>
+        
+        <Border Grid.Row="2" BorderBrush="#d1d5da" 
+                CornerRadius="5" Margin="80,0,80,40"
+                BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" Content="New to GitHub?" 
+                       HorizontalContentAlignment="Right"/>
+                
+                <Button Content="Create an account." 
+                        Style="{StaticResource ButtonLabelLikeStyle}"
+                        HorizontalAlignment="Left" Grid.Column="2"/>
+            </Grid>
+        </Border>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" > 
+            <Button Style="{StaticResource ButtonLabelLikeStyle}"
+                    Content="Term" Margin="10"/>
+            
+            <Button Style="{StaticResource ButtonLabelLikeStyle}"
+                    Content="Privacy"/>
+            
+            <Button Style="{StaticResource ButtonLabelLikeStyle}"
+                    Content="Security" Margin="10"/>
+            
+            <Button Style="{StaticResource ButtonLabelLikeStyle}"
+                    Content="Contact GitHub"  />
+
+            <Label Margin="20 0 0 0"
+                   Content="{Binding MyString}"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
